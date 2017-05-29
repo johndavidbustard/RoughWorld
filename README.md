@@ -1,3 +1,3 @@
 # RoughWorld
 
-Dont mind this, just testing uploading
+RoughWorld is a platform for commonsense AI based on a game-like simulation representation of knowledge.
