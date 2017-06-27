@@ -6,7 +6,7 @@ public class ActionLanguageInstance
 //For example moving from sitting to standing
 //Picking an object up	
 	
-	//initially all changes are text adventure form
+	//As with state actions can have physical representations
 	ActionPhysicalInstance physicalRepresentation = null;
 	
 	//relative times over which state changes

@@ -1,4 +1,4 @@
-package ai.knowledge_representation.state_model;
+package ai.model_construction.state_model;
 
 public class PoseLanguageModel 
 {
