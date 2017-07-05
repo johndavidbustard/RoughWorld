@@ -35,11 +35,13 @@ Types include:
 
 Each concept requires a unique name which is human and machine readable. Another objective is that it is relatively easy to find concepts using existing file system tools of operating systems. Current proposed format for concept names:
 
-type_cn_conceptnetname_wn_wordnetid
+type_cn_conceptnetname_wn31_wordnetid
 
 e.g.
 
-room_cn_bedroom_wn_n104112987
+room_cn_bedroom_wn31_n104112987
+
+As wordnet has very different ids for different versions the wordnet version needs to be included with the id
 
 If wordnet or conceptnet examples don't exist then leave them out. If there is no conceptnet equivalent then create a new name so that concepts always have a human readable name. Ultimately we should aim to contribute back to conceptnet where this makes sense and is possible.
 
