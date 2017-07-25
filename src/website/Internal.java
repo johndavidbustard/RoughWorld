@@ -2,18 +2,28 @@ package website;
 
 import java.util.ArrayList;
 
+import utils.FileStoreInterface;
 import web.WebClient;
 import web.WebInterface;
 import web.WebRequest;
 import web.WebResponse;
 import website.views.DynamicWebPage;
+import website.views.EditMapInstance;
+import website.views.EditObjectInstance;
+import website.views.EditPortalInstance;
+import website.views.EditRoomInstance;
+import website.views.EditUtils;
 import website.views.InternalIndex;
+import website.views.ViewMapConcept;
+import website.views.ViewObjectConcept;
+import website.views.ViewRoomConcept;
 
 //An internal website for experimentation and curation of the dataset
 public class Internal 
 {
 	String externalip = null;
 	WebInterface webInterface = null;
+	FileStoreInterface fs = new FileStoreInterface("");
 	
 	ArrayList<DynamicWebPage> pages = new ArrayList<DynamicWebPage>();
 	
@@ -92,8 +102,24 @@ public class Internal
 		int port = 8080;
 		webInterface = new WebInterface(port);
 
-		InternalIndex index = new InternalIndex();
+		InternalIndex index = new InternalIndex(fs);
 		pages.add(index);
+		ViewMapConcept vmi = new ViewMapConcept(fs);
+		pages.add(vmi);
+		ViewObjectConcept voi = new ViewObjectConcept(fs);
+		pages.add(voi);
+		ViewRoomConcept vri = new ViewRoomConcept(fs);
+		pages.add(vri);
+		EditMapInstance emi = new EditMapInstance(fs);
+		pages.add(emi);
+		EditObjectInstance eoi = new EditObjectInstance(fs);
+		pages.add(eoi);
+		EditRoomInstance eri = new EditRoomInstance(fs);
+		pages.add(eri);
+		EditPortalInstance epi = new EditPortalInstance(fs);
+		pages.add(epi);
+		
+		EditUtils.findShapesToCopy(fs);
 	}
 	
 	public void run()
@@ -118,15 +144,24 @@ public class Internal
 		        	if(p.process(toProcess))
 		        	{
 		        		processed = true;
-		        		toProcess.r = new WebResponse( WebResponse.HTTP_OK, WebResponse.MIME_HTML, p, null );		        	
+		        		if(toProcess.r==null)
+		        			toProcess.r = new WebResponse( WebResponse.HTTP_OK, WebResponse.MIME_HTML, p, null );		        	
 		        		break;
 		        	}
 		        }
 		        
 		        if(!processed)
 		        {
-		        	toProcess.r = new WebResponse( WebResponse.HTTP_NOTFOUND, WebResponse.MIME_PLAINTEXT,
-							 "Error 404, file not found." );
+			        String asFilepath = fs.decodeFilePath(toProcess.path);
+			        if((asFilepath!=null)&&fs.exists(asFilepath))
+			        {
+			        	toProcess.r = WebResponse.serveFile(toProcess.parms, asFilepath);
+			        }
+			        else
+			        {
+			        	toProcess.r = new WebResponse( WebResponse.HTTP_NOTFOUND, WebResponse.MIME_PLAINTEXT,
+								 "Error 404, file not found." );
+			        }
 		        }
 		        //create a new thread that will send the response to the webbrowser
 				Thread t = new Thread( toProcess );

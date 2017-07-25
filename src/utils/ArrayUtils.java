@@ -9,6 +9,13 @@ public class ArrayUtils
 		nv[v.length] = i;
 		return nv;
 	}
+	public static int[] add(int[] v, int i)
+	{
+		int[] nv = new int[v.length+1];
+		System.arraycopy(v, 0, nv, 0, v.length);
+		nv[v.length] = i;
+		return nv;
+	}
 	public static double[] add(double[] v, double[] i)
 	{
 		double[] nv = new double[v.length+i.length];
@@ -34,6 +41,29 @@ public class ArrayUtils
 		if((v.length-(ind+len))>=0)
 			System.arraycopy(v, ind+len, nv, ind, v.length-(ind+len));
 		return nv;
+	}
+	public static int[] remove(int[] v, int ind,int len)
+	{
+		int[] nv = new int[v.length-len];
+		if(ind!=0)
+			System.arraycopy(v, 0, nv, 0, ind);
+		if((v.length-(ind+len))>=0)
+			System.arraycopy(v, ind+len, nv, ind, v.length-(ind+len));
+		return nv;
+	}
+
+	public static int getIndex(String[] within, String w)
+	{
+		if(within==null)
+			return -1;
+		for(int i=0;i<within.length;i++)
+		{
+			if(within[i].equalsIgnoreCase(w))
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

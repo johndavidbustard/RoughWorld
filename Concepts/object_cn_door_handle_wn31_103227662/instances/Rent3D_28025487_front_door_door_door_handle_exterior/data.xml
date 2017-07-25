@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectLanguageInstance>
+    <uniqueID>object_cn_door_handle_wn31_103227662/Rent3D_28025487_front_door_door_door_handle_exterior</uniqueID>
+    <name>door_handle_exterior</name>
+    <type>object</type>
+    <physicalRepresentation>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>-0.06</within_metric_transform>
+        <within_metric_transform>0.05</within_metric_transform>
+        <within_metric_transform>0.97</within_metric_transform>
+        <shape>
+            <parameters>0.02</parameters>
+            <parameters>0.1</parameters>
+            <parameters>0.02</parameters>
+        </shape>
+    </physicalRepresentation>
+    <within>object_cn_door_wn31_103226432/Rent3D_28025487_front_door_door</within>
+    <within_type>object</within_type>
+</objectLanguageInstance>

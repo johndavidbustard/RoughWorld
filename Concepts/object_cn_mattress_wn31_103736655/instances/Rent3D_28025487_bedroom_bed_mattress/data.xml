@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectLanguageInstance>
+    <uniqueID>object_cn_mattress_wn31_103736655/Rent3D_28025487_bedroom_bed_mattress</uniqueID>
+    <name>mattress</name>
+    <type>object</type>
+    <physicalRepresentation>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>-0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.04</within_metric_transform>
+        <within_metric_transform>0.045</within_metric_transform>
+        <within_metric_transform>0.265</within_metric_transform>
+        <shape>
+            <parameters>0.89</parameters>
+            <parameters>1.89</parameters>
+            <parameters>0.17</parameters>
+        </shape>
+    </physicalRepresentation>
+    <within>object_cn_single_bed_wn31_104164206/Rent3D_28025487_bedroom_bed</within>
+    <within_type>object</within_type>
+</objectLanguageInstance>

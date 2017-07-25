@@ -27,6 +27,7 @@ public class WebClientRequest implements Runnable
 	String path;
 	String parameters;
 	File[] fileuploads = null;
+	boolean getNotPost = true;
 
 	public WebClientRequest(WebClient wclient,String path,String params,boolean secure)
 	{
@@ -120,18 +121,28 @@ public class WebClientRequest implements Runnable
 				
 				final String USER_AGENT = "Mozilla/5.0";
 				//add reuqest header
-				con.setRequestMethod("POST");
+				if(getNotPost)
+				{
+					con.setRequestMethod("GET");
+				}
+				else
+				{
+					con.setRequestMethod("POST");
+				}
 				con.setRequestProperty("User-Agent", USER_AGENT);
 				con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		 
 				String urlParameters = parameters;
 		 
-				// Send post request
-				con.setDoOutput(true);
-				DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-				wr.writeBytes(urlParameters);
-				wr.flush();
-				wr.close();
+				if(!getNotPost)
+				{
+					// Send post request
+					con.setDoOutput(true);
+					DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+					wr.writeBytes(urlParameters);
+					wr.flush();
+					wr.close();
+				}
 
 				//int responseCode = con.getResponseCode();
 				System.out.println("\nSending 'POST' request to URL : " + url);
@@ -144,6 +155,7 @@ public class WebClientRequest implements Runnable
 				ArrayList<String> result = new ArrayList<String>();
 				while ((line = reader.readLine()) != null) 
 				{
+					//System.out.println(line);
 					result.add(line);
 				}
 				

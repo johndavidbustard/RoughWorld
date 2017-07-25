@@ -1,0 +1,43 @@
+﻿//A part of a larger building, that is a single residence
+name = “Flat”;
+
+//One of a set of standard building shapes
+//The property includes a roof terrace but that is included in the definition of the larger property
+//width of top
+//height of top
+//width of bottom
+//height of bottom
+//width of  top room plus two lots of exterior wall (4.5+0.36+0.36)
+//height of  top room plus two lots of exterior wall (3.3+0.36+0.36)
+//the floorplan is not complete so the hall dimensions are estimated to be a square shape
+//hall width/height = 3-(1.8+0.131) = 3-(1.931) = 1.069
+//lower height
+//2.5+ 0.131+1.069+ 0.131-0.36+0.36 = 2.5+1.2+0.131=3.831
+//lower width
+//3+0.36+0.36 = 3.72
+shape = new ReversedRShape(5.22,4.02,3.72,3.831);
+
+//position of room within map
+RoomInstanceWithin livingroom = room_cn_living_room_wn31_103685038/instance/Rent3D_28025487; 
+livingroom.relativeTransform = {0.36,0.36,0.0,0.0,0.0,0.0};
+
+RoomInstanceWithin kitchen = room_cn_kitchen_wn31_103625099/instance/Rent3D_28025487; 
+//kitchen width
+//1.8-(0.36+0.131) = 4.5-(0.491)
+//1.309
+//5.22-(0.36+1.309)=5.22-1.669
+kitchen.relativeTransform = {3.551,0.36,0.0,0.0,0.0,0.0};
+
+RoomInstanceWithin bathroom = room_cn_bathroom_wn31_102810916/instance/Rent3D_28025487; 
+bathroom.relativeTransform = {0.0,0.0,0.0,0.0,0.0,0.0};
+
+
+
+//The interior portals
+InternalPortalWithin bedroomDoorway =  portal_cn_doorway_wn31_103228735/instance/Rent3D_28025487_bedroomdoorway;
+
+//external named portal
+//Portal instances describe the maps and room instances that connect them
+ExternalPortalWithin frontDoorway = portal_cn_doorway_wn31_103228735/instance/Rent3D_28025487_frontdoorway;
+frontDoorway.relativeTransform = {0.0,0.0,0.0,0.0,0.0,0.0};
+

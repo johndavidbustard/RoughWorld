@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectLanguageInstance>
+    <uniqueID>object_sofa_back_cushion/Rent3D_28025487_reception_sofa_back_cushion_left</uniqueID>
+    <name>back_cushion_left</name>
+    <type>object</type>
+    <physicalRepresentation>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.8660254037844387</within_metric_transform>
+        <within_metric_transform>-0.49999999999999994</within_metric_transform>
+        <within_metric_transform>-0.0</within_metric_transform>
+        <within_metric_transform>0.49999999999999994</within_metric_transform>
+        <within_metric_transform>0.8660254037844387</within_metric_transform>
+        <within_metric_transform>0.135</within_metric_transform>
+        <within_metric_transform>0.54</within_metric_transform>
+        <within_metric_transform>0.43</within_metric_transform>
+        <shape>
+            <parameters>0.5</parameters>
+            <parameters>0.13</parameters>
+            <parameters>0.44</parameters>
+        </shape>
+    </physicalRepresentation>
+    <within>object_cn_sofa_wn31_104263630/Rent3D_28025487_reception_sofa</within>
+    <within_type>object</within_type>
+</objectLanguageInstance>

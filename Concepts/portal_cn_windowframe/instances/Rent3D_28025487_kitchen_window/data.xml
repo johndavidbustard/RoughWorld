@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectLanguageInstance>
+    <uniqueID>portal_cn_windowframe/Rent3D_28025487_kitchen_window</uniqueID>
+    <name>kitchen_window</name>
+    <type>portal</type>
+    <physicalRepresentation>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>3.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.1</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>-0.3599999999999999</within_metric_transform>
+        <within_metric_transform>-0.36</within_metric_transform>
+        <within_metric_transform>1.1</within_metric_transform>
+        <shape>
+            <parameters>1.35</parameters>
+            <parameters>0.36</parameters>
+            <parameters>0.4505</parameters>
+        </shape>
+    </physicalRepresentation>
+    <within>map_cn_flat/Rent3D_28025487</within>
+    <within>room_cn_kitchen_wn31_103625099/Rent3D_28025487_kitchen</within>
+    <within_type>map</within_type>
+    <within_type>room</within_type>
+</objectLanguageInstance>

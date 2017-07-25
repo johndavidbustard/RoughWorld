@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectLanguageInstance>
+    <uniqueID>object_door_handle_backplate/Rent3D_28025487_front_door_door_backplate</uniqueID>
+    <name>backplate</name>
+    <type>object</type>
+    <physicalRepresentation>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.041</within_metric_transform>
+        <within_metric_transform>0.035</within_metric_transform>
+        <within_metric_transform>0.85</within_metric_transform>
+        <shape>
+            <parameters>0.01</parameters>
+            <parameters>0.05</parameters>
+            <parameters>0.19</parameters>
+        </shape>
+    </physicalRepresentation>
+    <within>object_cn_door_wn31_103226432/Rent3D_28025487_front_door_door</within>
+    <within_type>object</within_type>
+</objectLanguageInstance>

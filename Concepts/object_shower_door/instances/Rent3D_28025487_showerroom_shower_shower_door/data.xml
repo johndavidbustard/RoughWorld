@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectLanguageInstance>
+    <uniqueID>object_shower_door/Rent3D_28025487_showerroom_shower_shower_door</uniqueID>
+    <name>shower_door</name>
+    <type>object</type>
+    <physicalRepresentation>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>-0.0</within_metric_transform>
+        <within_metric_transform>0.0</within_metric_transform>
+        <within_metric_transform>1.0</within_metric_transform>
+        <within_metric_transform>0.05</within_metric_transform>
+        <within_metric_transform>0.065</within_metric_transform>
+        <within_metric_transform>0.167</within_metric_transform>
+        <contains_metric_transform>1.0</contains_metric_transform>
+        <contains_metric_transform>0.0</contains_metric_transform>
+        <contains_metric_transform>0.0</contains_metric_transform>
+        <contains_metric_transform>0.0</contains_metric_transform>
+        <contains_metric_transform>1.0</contains_metric_transform>
+        <contains_metric_transform>0.0</contains_metric_transform>
+        <contains_metric_transform>-0.0</contains_metric_transform>
+        <contains_metric_transform>0.0</contains_metric_transform>
+        <contains_metric_transform>1.0</contains_metric_transform>
+        <contains_metric_transform>-0.03</contains_metric_transform>
+        <contains_metric_transform>0.52</contains_metric_transform>
+        <contains_metric_transform>0.8</contains_metric_transform>
+        <shape>
+            <parameters>0.005</parameters>
+            <parameters>0.613</parameters>
+            <parameters>1.66</parameters>
+        </shape>
+    </physicalRepresentation>
+    <within>object_cn_shower_wn31_104216003/Rent3D_28025487_showerroom_shower</within>
+    <within_type>object</within_type>
+    <contains>object_shower_door_handle/Rent3D_28025487_showerroom_shower_shower_door_handle</contains>
+    <contains_type>object</contains_type>
+</objectLanguageInstance>

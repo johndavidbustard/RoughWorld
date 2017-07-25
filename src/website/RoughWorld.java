@@ -2,6 +2,7 @@ package website;
 
 import java.util.ArrayList;
 
+import utils.FileStoreInterface;
 import web.WebClient;
 import web.WebInterface;
 import web.WebRequest;
@@ -14,7 +15,8 @@ public class RoughWorld
 {
 	String externalip = null;
 	WebInterface webInterface = null;
-	
+	FileStoreInterface fs = new FileStoreInterface("");
+
 	ArrayList<DynamicWebPage> pages = new ArrayList<DynamicWebPage>();
 	
 	boolean keepRunning = true;
@@ -92,7 +94,7 @@ public class RoughWorld
 		int port = 8080;
 		webInterface = new WebInterface(port);
 
-		RoughWorldIndex index = new RoughWorldIndex();
+		RoughWorldIndex index = new RoughWorldIndex(fs);
 		pages.add(index);
 	}
 	
