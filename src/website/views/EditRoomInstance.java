@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import ai.knowledge_representation.state_instance.ObjectLanguageInstance;
 import ai.knowledge_representation.state_instance.ObjectPhysicalInstance;
 import tools.visualisation.state_visualisation.ToSVG.StateToSVG;
+import utils.ArrayUtils;
 import utils.FileStoreInterface;
 import utils.shapes.ParametricShape;
 import web.WebRequest;
@@ -133,10 +134,30 @@ public class EditRoomInstance extends DynamicWebPage
 			ObjectLanguageInstance.saveObject(o, fs, datapath);
 		}
 		
+//		for(int i=0;i<o.contains.length;i++)
+//		{
+//			String cid = o.contains[i];
+//			
+//			String cpath = ObjectLanguageInstance.uniqueIdToPath(cid);
+//			ObjectLanguageInstance c = ObjectLanguageInstance.loadObject(fs, cpath+"/data.txt");
+//			
+//			if(c==null)
+//			{
+//				int cind = i;
+//        		o.physicalRepresentation.contains_metric_transform = ArrayUtils.remove(o.physicalRepresentation.contains_metric_transform,cind*12,12);
+//        		o.contains = ArrayUtils.remove(o.contains,cind,1);
+//        		o.contains_type = ArrayUtils.remove(o.contains_type,cind,1);
+//
+//        		ObjectLanguageInstance.saveObject(o, fs, datapath);
+//				break;
+//			}
+//		}
+		
 		pw.append("<h1>"+concept+"/"+instance+"</h1>");
 
 		printRoom(o,pw);
 		
+		EditUtils.printCharacters(o, pw, fs);
 		EditUtils.printObjects(o, pw, fs);
 		
 		pw.flush();	}

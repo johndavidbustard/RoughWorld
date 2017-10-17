@@ -4,19 +4,20 @@ import java.io.Serializable;
 
 import utils.ArrayUtils;
 import utils.GeneralMatrixDouble;
+import utils.GeneralMatrixString;
 import utils.shapes.ParametricShape;
 
 public class ObjectPhysicalInstance implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public String iconImage;
+//	public String iconImage;
 	//There may be multiple photographs of an instance of an object
-	public String[] photographs;
+//	public String[] photographs;
 	//There may be a 3d model 
 	//typically an obj file with mtl and texture for rigid objects
 	//or a collada file for a skinned poseable object
-	public String model;
+//	public String model;
 	
 	
 	//The transform defines the back left bottom of the cubic approximation of the object in the room it is within
@@ -24,16 +25,16 @@ public class ObjectPhysicalInstance implements Serializable
 	public double[] within_metric_transform = new double[]{};	
 	public double[] contains_metric_transform = new double[]{};	
 	//The approximate 3d spatial dimensions of the object
-	public double[] approximation_cuboid = null;
+//	public double[] approximation_cuboid = null;
 	//A parametric shape that is more accurate than the approximation cuboid
 	public ParametricShape shape = null;
 	
 	
 	
-	//These are 3d matrix transforms stored in 12 doubles 3x3 for rotation and 3 for translation
-	public double[] parts_metric_transform = new double[]{};
-	//These are an approximate cuboid volume, the volume extends from the top, left, back defined by the metric transform
-	public double[] parts_approximation_cuboid = new double[]{};	
+//	//These are 3d matrix transforms stored in 12 doubles 3x3 for rotation and 3 for translation
+//	public double[] parts_metric_transform = new double[]{};
+//	//These are an approximate cuboid volume, the volume extends from the top, left, back defined by the metric transform
+//	public double[] parts_approximation_cuboid = new double[]{};	
 
 	public void add(ObjectPhysicalInstance i,double x,double y,double z)
 	{
@@ -81,6 +82,7 @@ public class ObjectPhysicalInstance implements Serializable
 		);
 	}
 
+	
 	public void add(ObjectPhysicalInstance i,double x,double y,double z,
 			double xr,double yr,double zr)
 	{

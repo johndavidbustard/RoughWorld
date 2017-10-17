@@ -1,5 +1,7 @@
 package utils.shapes;
 
+import utils.GeneralMatrixString;
+
 public class RectangularRoom extends ParametricShape
 {
 	private static final long serialVersionUID = 1L;
@@ -8,6 +10,11 @@ public class RectangularRoom extends ParametricShape
 	public static final String[] sidenames = {"north","south","west","east","floor","ceiling"};
 	public String[] getParameterNames() { return parameternames; }
 	public String[] getSideNames() { return sidenames; }
+
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		paths.push_back(prefix+"/RectangularRoom");
+	}
 
 	public RectangularRoom()
 	{

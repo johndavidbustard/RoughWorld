@@ -1,7 +1,11 @@
 package utils;
 
-public class GeneralMatrixFloat
+import java.io.Serializable;
+
+public class GeneralMatrixFloat implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	public static final float EPSILON = 0.000000001f;
 	//public static final float EPSILON=5.9e-8f;
 	public int width = 0; //columns

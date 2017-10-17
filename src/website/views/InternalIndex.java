@@ -53,6 +53,16 @@ public class InternalIndex extends DynamicWebPage
 				pw.append("<a href=\"/ViewObjectConcept.html/"+t+"\">"+t+"</a><br>");
 			}
 			else
+			if(t.startsWith("pose_"))
+			{
+				pw.append("<a href=\"/ViewPoseConcept.html/"+t+"\">"+t+"</a><br>");
+			}
+			else
+			if(t.startsWith("story_"))
+			{
+				pw.append("<a href=\"/ViewStoryConcept.html/"+t+"\">"+t+"</a><br>");
+			}
+			else
 			{
 				pw.append("<h"+depth+">"+t+"</h"+depth+">");
 
@@ -68,6 +78,9 @@ public class InternalIndex extends DynamicWebPage
 		//list the concepts
 		pw.append("<h1>Rough World</h1>");
 
+		pw.append("<h2><a href='EditPoseModel.html'>Create A Pose Model</a></h2>");
+		
+		
 		//the default taxonomy
 		//view all the maps, objects etc. as lists
 		File taxdir = new File("Taxonomies");

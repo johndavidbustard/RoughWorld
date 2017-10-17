@@ -1,7 +1,11 @@
 package utils;
 
-public class GeneralMatrixObject 
+import java.io.Serializable;
+
+public class GeneralMatrixObject implements Serializable 
 {
+	private static final long serialVersionUID = 1L;
+
 	public int width;
 	public int height;
 	public Object[] value;

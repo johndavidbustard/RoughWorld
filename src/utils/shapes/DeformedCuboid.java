@@ -1,5 +1,7 @@
 package utils.shapes;
 
+import utils.GeneralMatrixString;
+
 public class DeformedCuboid extends ParametricShape
 {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +36,11 @@ public class DeformedCuboid extends ParametricShape
 	public static final String[] sidenames = {"left","right","back","front","bottom","top"};
 	public String[] getParameterNames() { return parameternames; }
 	public String[] getSideNames() { return sidenames; }
+
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		paths.push_back(prefix+"/DeformedCuboid");
+	}
 
 	public DeformedCuboid()
 	{
@@ -102,6 +109,43 @@ public class DeformedCuboid extends ParametricShape
 			parameters[vi*3+1] *= sy;
 			parameters[vi*3+2] *= sz;
 		}
+	}
+	
+	public void getAABB(double[] xyz)
+	{
+		double minx = Float.MAX_VALUE;
+		double miny = Float.MAX_VALUE;
+		double minz = Float.MAX_VALUE;
+		double maxx = -Float.MAX_VALUE;
+		double maxy = -Float.MAX_VALUE;
+		double maxz = -Float.MAX_VALUE;
+		
+		for(int vi=0;vi<8;vi++)
+		{
+			double vx = parameters[vi*3+0];
+			double vy = parameters[vi*3+1];
+			double vz = parameters[vi*3+2];
+			
+			if(vx<minx)
+				minx = vx;
+			if(vy<miny)
+				miny = vy;
+			if(vz<minz)
+				minz = vz;
+			
+			if(vx>maxx)
+				maxx = vx;
+			if(vy>maxy)
+				maxy = vy;
+			if(vz>maxz)
+				maxz = vz;
+		}
+		xyz[0] = minx;
+		xyz[1] = miny;
+		xyz[2] = minz;
+		xyz[3] = maxx;
+		xyz[4] = maxy;
+		xyz[5] = maxz;
 	}
 	
 	public void getCuboidDimensions(double[] xyz)

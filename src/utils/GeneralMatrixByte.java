@@ -1,7 +1,11 @@
 package utils;
 
-public class GeneralMatrixByte 
+import java.io.Serializable;
+
+public class GeneralMatrixByte implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	public int width=0; //columns
 	public int height=0; //rows
 	public byte[] value=null; //array of values

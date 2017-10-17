@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import tools.visualisation.state_visualisation.ToXML.StateToXML;
 import utils.ArrayUtils;
 import utils.FileStoreInterface;
+import utils.GeneralMatrixDouble;
+import utils.GeneralMatrixString;
 
 //Most things are objects
 //This class is intentionally as simple as possible so that it can be serialised to an from a database efficiently
@@ -39,28 +41,31 @@ public class ObjectLanguageInstance implements Serializable
 
 	//An object's pose can consist of many separate poses e.g. head pose, arm pose, face expression etc.
 	//Each pose can have name value properties
-	//This refers to 
-	public String[] poses = new String[]{};
-
+	
+	//This refers to pose models (as pose instances
+	public String[] poseModels = new String[]{};
+	//which role within the pose e.g. sat on or sitting
+	public int[] poseRole = new int[]{};
+	
 	//Relations between objects (typically only refers to objects near to this object (as could be deduced by sensing the object)
 	//For example
 	//Relative position in space
-	public String[] relations_with = new String[]{};
-	public String[] relations_with_type = new String[]{};
-	public String[][] relations_properties = new String[][]{};
+//	public String[] relations_with = new String[]{};
+//	public String[] relations_with_type = new String[]{};
+//	public String[][] relations_properties = new String[][]{};
 	
 	//Objects can have named sub parts (they are not necessarily exclusive e.g. front of person, torso, rib cage,
-	public String[] parts = new String[]{};
+//	public String[] parts = new String[]{};
 		
 	//For example: 
 	//Relative position in space
 	//Supported by
 	//Directed at
-	public String[] parts_relations_with = new String[]{};
-	public String[] parts_relations_with_type = new String[]{};
-	//e.g. feet resting on the top of a bed
-	public String[] parts_relations_part = new String[]{};
-	public String[][] parts_relations_properties = new String[][]{};
+//	public String[] parts_relations_with = new String[]{};
+//	public String[] parts_relations_with_type = new String[]{};
+//	//e.g. feet resting on the top of a bed
+//	public String[] parts_relations_part = new String[]{};
+//	public String[][] parts_relations_properties = new String[][]{};
 	
 
 	//Special relations relating to how space is defined
@@ -74,9 +79,15 @@ public class ObjectLanguageInstance implements Serializable
 	public String[] contains = new String[]{};
 	public String[] contains_type = new String[]{};
 
+	public String[] contains_poseModels = new String[]{};
+	//indicates an instance or a model
+	//public String[] contains_poses_type = new String[]{};
+	//mapping contained instances to the instances defined by the pose
+	public String[][] contains_poses_instances = new String[][]{};
+
 	//objects, such as buildings, can have objects within them, such as rooms, that themselves
 	//contain objects
-	public String[] portals_to_internal_objects = null;
+	//public String[] portals_to_internal_objects = null;
 
 	public static String uniqueIdToPath(String uid)
 	{
@@ -135,6 +146,36 @@ public class ObjectLanguageInstance implements Serializable
 	    {
 	         i.printStackTrace();
 	    }
+	}
+
+	public void moveContainedTo(ObjectLanguageInstance o,
+				GeneralMatrixDouble zrot)
+	{
+		int ind = GeneralMatrixString.find(o.within, uniqueID);
+		
+		for(int j=0;j<3;j++)
+		{
+			for(int i=0;i<3;i++)
+			{
+				o.physicalRepresentation.within_metric_transform[12*ind+3*j+i] = zrot.value[4*j+i];
+			}
+		}
+		o.physicalRepresentation.within_metric_transform[12*ind+9+0] = zrot.value[4*3+0];
+		o.physicalRepresentation.within_metric_transform[12*ind+9+1] = zrot.value[4*3+1];
+		o.physicalRepresentation.within_metric_transform[12*ind+9+2] = zrot.value[4*3+2];
+
+		int cind = GeneralMatrixString.find(contains, o.uniqueID);
+
+		for(int j=0;j<3;j++)
+		{
+			for(int i=0;i<3;i++)
+			{
+				physicalRepresentation.contains_metric_transform[12*cind+3*j+i] = zrot.value[4*j+i];
+			}
+		}
+		physicalRepresentation.contains_metric_transform[12*cind+9+0] = zrot.value[4*3+0];
+		physicalRepresentation.contains_metric_transform[12*cind+9+1] = zrot.value[4*3+1];
+		physicalRepresentation.contains_metric_transform[12*cind+9+2] = zrot.value[4*3+2];
 	}
 
 	public void add(ObjectLanguageInstance i)

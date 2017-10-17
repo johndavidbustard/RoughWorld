@@ -1,7 +1,11 @@
 package utils;
 
-public class GeneralMatrixInt 
+import java.io.Serializable;
+
+public class GeneralMatrixInt implements Serializable 
 {
+	private static final long serialVersionUID = 1L;
+
 	public int width=0; //columns
 	public int height=0; //rows
 	public int[] value=null; //array of values

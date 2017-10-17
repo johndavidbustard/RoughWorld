@@ -7,7 +7,12 @@ To get the latest version of this code goto http://johndavidbustard.com/mmconst.
 */
 package utils;
 
-public class GeneralMatrixDouble {
+import java.io.Serializable;
+
+public class GeneralMatrixDouble  implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
 	public static final double EPSILON=5.9e-8f;
 	public int width; //columns
 	public int height; //rows
@@ -368,31 +373,31 @@ public class GeneralMatrixDouble {
 	{
 		double sin=(double)Math.sin(z);
 		double cos=(double)Math.cos(z);
-		value[4*0+0] = cos;
-		value[4*0+1] = -sin;
-		value[4*1+0] = sin;
-		value[4*1+1] = cos;
-		value[4*2+2] = 1.0f;
+		value[width*0+0] = cos;
+		value[width*0+1] = -sin;
+		value[width*1+0] = sin;
+		value[width*1+1] = cos;
+		value[width*2+2] = 1.0f;
 	}
 	public void set3DTransformYRotation(double y)
 	{
 		double sin=(double)Math.sin(y);
 		double cos=(double)Math.cos(y);
-		value[4*0+0] = cos;
-		value[4*0+2] = sin;
-		value[4*2+0] = -sin;
-		value[4*2+2] = cos;
-		value[4*1+1] = 1.0f;
+		value[width*0+0] = cos;
+		value[width*0+2] = sin;
+		value[width*2+0] = -sin;
+		value[width*2+2] = cos;
+		value[width*1+1] = 1.0f;
 	}
 	public void set3DTransformXRotation(double x)
 	{
 		double sin=(double)Math.sin(x);
 		double cos=(double)Math.cos(x);
-		value[4*1+1] = cos;
-		value[4*1+2] = -sin;
-		value[4*2+1] = sin;
-		value[4*2+2] = cos;
-		value[4*0+0] = 0.0f;
+		value[width*1+1] = cos;
+		value[width*1+2] = -sin;
+		value[width*2+1] = sin;
+		value[width*2+2] = cos;
+		value[width*0+0] = 0.0f;
 	}
 
 	public void set3DTransformRotationYFirst(double x,double y,double z)

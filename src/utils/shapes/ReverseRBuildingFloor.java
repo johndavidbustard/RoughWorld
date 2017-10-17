@@ -1,5 +1,7 @@
 package utils.shapes;
 
+import utils.GeneralMatrixString;
+
 public class ReverseRBuildingFloor extends ParametricShape
 {
 	private static final long serialVersionUID = 1L;
@@ -8,6 +10,11 @@ public class ReverseRBuildingFloor extends ParametricShape
 	public static final String[] sidenames = {"north","south1","south2","west1","west2","east","floor","ceiling"};
 	public String[] getParameterNames() { return parameternames; }
 	public String[] getSideNames() { return sidenames; }
+
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		paths.push_back(prefix+"/ReverseRBuildingFloor");
+	}
 
 	public ReverseRBuildingFloor()
 	{

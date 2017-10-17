@@ -11,12 +11,16 @@ import website.views.DynamicWebPage;
 import website.views.EditMapInstance;
 import website.views.EditObjectInstance;
 import website.views.EditPortalInstance;
+import website.views.EditPoseModel;
 import website.views.EditRoomInstance;
+import website.views.EditStoryInstance;
 import website.views.EditUtils;
 import website.views.InternalIndex;
 import website.views.ViewMapConcept;
 import website.views.ViewObjectConcept;
+import website.views.ViewPoseConcept;
 import website.views.ViewRoomConcept;
+import website.views.ViewStoryConcept;
 
 //An internal website for experimentation and curation of the dataset
 public class Internal 
@@ -110,6 +114,10 @@ public class Internal
 		pages.add(voi);
 		ViewRoomConcept vri = new ViewRoomConcept(fs);
 		pages.add(vri);
+		ViewPoseConcept vpi = new ViewPoseConcept(fs);
+		pages.add(vpi);
+		ViewStoryConcept vsc = new ViewStoryConcept(fs);
+		pages.add(vsc);
 		EditMapInstance emi = new EditMapInstance(fs);
 		pages.add(emi);
 		EditObjectInstance eoi = new EditObjectInstance(fs);
@@ -118,7 +126,13 @@ public class Internal
 		pages.add(eri);
 		EditPortalInstance epi = new EditPortalInstance(fs);
 		pages.add(epi);
-		
+
+		EditPoseModel epm = new EditPoseModel(fs);
+		pages.add(epm);
+
+		EditStoryInstance esi = new EditStoryInstance(fs);
+		pages.add(esi);
+
 		EditUtils.findShapesToCopy(fs);
 	}
 	

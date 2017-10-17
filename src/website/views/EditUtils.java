@@ -9,6 +9,7 @@ import utils.GeneralMatrixDouble;
 import utils.GeneralMatrixInt;
 import utils.GeneralMatrixString;
 import utils.shapes.CSGShape;
+import utils.shapes.HumanShape;
 import utils.shapes.ModifiedCopyShape;
 import utils.shapes.ParametricShape;
 import web.WebRequest;
@@ -19,6 +20,51 @@ public class EditUtils
 {
 	public static GeneralMatrixString shapesToCopy = new GeneralMatrixString(1);
 	public static GeneralMatrixString shapesToPaths = new GeneralMatrixString(1);
+
+	public static void findConcepts(String type,GeneralMatrixString cs)
+	{
+		String tofind = type+"_";
+		File conceptsdir = new File("Concepts");
+		String[] concepts = conceptsdir.list();
+		for(int i=0;i<concepts.length;i++)
+		{
+			String c = concepts[i];
+			if(c.startsWith(tofind))
+			{
+				cs.push_back(c);
+			}
+		}
+	}
+	
+	public static void findInstances(String concept,GeneralMatrixString instances)
+	{
+		File conceptdir = new File("Concepts/"+concept+"/instances/");
+		String[] concepts = conceptdir.list();
+		if(concepts==null)
+			return;
+		for(int i=0;i<concepts.length;i++)
+		{
+			String c = concepts[i];
+			File instf = new File("Concepts/"+concept+"/instances/"+c);
+			if(instf.isDirectory())
+				instances.push_back(concept+"/"+c);
+		}
+	}
+	
+	public static void findModels(String concept,GeneralMatrixString instances)
+	{
+		File conceptdir = new File("Concepts/"+concept+"/models/");
+		String[] concepts = conceptdir.list();
+		if(concepts==null)
+			return;
+		for(int i=0;i<concepts.length;i++)
+		{
+			String c = concepts[i];
+			File instf = new File("Concepts/"+concept+"/models/"+c);
+			if(instf.isDirectory())
+				instances.push_back(concept+"/"+c);
+		}
+	}
 	
 	public static void findShapesToCopy(FileStoreInterface fs)
 	{
@@ -36,6 +82,11 @@ public class EditUtils
 			{
 				continue;
 			}
+			
+			if(c.startsWith("story"))
+				continue;
+			if(c.startsWith("pose"))
+				continue;
 			
 			String[] insts = cInstdir.list();
 			for(int ii=0;ii<insts.length;ii++)
@@ -230,6 +281,12 @@ pw.append("</tr>");
 
 				String[] pnames = rshape.getParameterNames();
 				
+				if(rshape.parameters==null)
+				{
+					rshape.parametersUpdated();
+					ObjectLanguageInstance.saveObject(r, fs, rpath+"/data.txt");
+				}
+
 				pw.append("<table>");
 				for(int pi=0;pi<pnames.length;pi++)
 				{
@@ -524,6 +581,105 @@ pw.append("</tr>");
 	pw.append("</form>");
 }
 	
+	public static void printCharacters(ObjectLanguageInstance o,PrintWriter pw,FileStoreInterface fs)
+	{
+		pw.append("<h2>Characters</h2>");
+		
+		printType(o, "character", o.type, pw, fs);
+		
+		pw.append("<h3>Add New Character</h3>");
+
+		//add a (new) room instance to the map
+		pw.append("<form action='/Edit"+o.type+"Instance.cgi/addCharacter' method='get' role='form'>\n");
+		
+		pw.append("<table>");
+		
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("Name");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"name\" type=\"text\" value=\"charactername\">");
+		pw.append("</td>");
+		pw.append("</tr>");
+
+		pw.append("</table>");
+
+		GeneralMatrixString roomconcepts = new GeneralMatrixString(1);
+		EditUtils.getConcepts("character", roomconcepts);
+		
+		pw.append("<h4>Character Type</h4>");
+		pw.append("<select name=\"type\">");
+		for(int i=0;i<roomconcepts.height;i++)
+		{
+			pw.append("<option value=\""+roomconcepts.value[i]+"\">"+roomconcepts.value[i]+"</option>");
+		}
+		pw.append("</select>");
+
+		pw.append("<h4>Character Position</h4>");
+		pw.append("<table>");
+		
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("X");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"x\" type=\"number\" step=\"0.001\" value=\"0.36\">");		
+		pw.append("</td>");
+		pw.append("</tr>");
+
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("Y");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"y\" type=\"number\" step=\"0.001\" value=\"0.36\">");		
+		pw.append("</td>");
+		pw.append("</tr>");
+
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("Z");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"z\" type=\"number\" step=\"0.001\" value=\"0.0\">");		
+		pw.append("</td>");
+		pw.append("</tr>");
+
+
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("X Rotation");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"xr\" type=\"number\" step=\"1.0\" value=\"0.0\">");		
+		pw.append("</td>");
+		pw.append("</tr>");
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("Y Rotation");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"yr\" type=\"number\" step=\"1.0\" value=\"0.0\">");		
+		pw.append("</td>");
+		pw.append("</tr>");
+		pw.append("<tr>");
+		pw.append("<td>");
+		pw.append("Z Rotation");
+		pw.append("</td>");
+		pw.append("<td>");
+		pw.append("<input name=\"zr\" type=\"number\" step=\"1.0\" value=\"0.0\">");		
+		pw.append("</td>");
+		pw.append("</tr>");
+
+		pw.append("</table>");
+		
+		pw.append("<input name=\"instance\" type=\"hidden\" value=\""+o.uniqueID+"\">");
+		
+		pw.append("<button class=\"btn btn-default\" type='submit'>Add</button>");
+		pw.append("</form>");
+
+	}
 	public static void printObjects(ObjectLanguageInstance o,PrintWriter pw,FileStoreInterface fs)
 	{
 		pw.append("<h2>Object</h2>");
@@ -762,6 +918,57 @@ pw.append("</tr>");
 			shape.parametersUpdated();
 		}
 		else
+		if(function.equalsIgnoreCase("addCharacter"))
+		{
+			//Create a default instance of a room (using a model)
+			ObjectLanguageInstance r = new ObjectLanguageInstance();
+//			name
+//			type
+			r.name = toProcess.parms.get("name");
+			r.name = r.name.replace(' ', '_');
+			r.type = "character";
+			String roomConcept = toProcess.parms.get("type");
+			String roomInstance = instance+"_"+r.name;
+			r.uniqueID = roomConcept+"/"+roomInstance;
+			
+			//only add the instance if it doesn't already exist
+			int existsind = ArrayUtils.getIndex(o.contains, r.uniqueID);
+			if(existsind==-1)
+			{	
+			
+    			String rpath = "Concepts/"+roomConcept+"/instances/";
+    			fs.createDirectory(rpath);
+    			rpath += roomInstance;
+    			fs.createDirectory(rpath);
+    			
+    			
+    			
+    			r.physicalRepresentation = new ObjectPhysicalInstance();
+    			ParametricShape shape = new HumanShape();
+    			r.physicalRepresentation.shape = shape;
+
+//    			x
+//    			y
+//    			z
+//    			width
+//    			height
+//    			ceiling_height
+//    			shape
+    			
+    			o.add(r);
+    			o.physicalRepresentation.add(r.physicalRepresentation, 
+    					Double.parseDouble(toProcess.parms.get("x")), 
+    					Double.parseDouble(toProcess.parms.get("y")),
+    					Double.parseDouble(toProcess.parms.get("z")),
+    					Double.parseDouble(toProcess.parms.get("xr")),
+    					Double.parseDouble(toProcess.parms.get("yr")),
+    					Double.parseDouble(toProcess.parms.get("zr"))
+    					);
+    			rpath += "/data.txt";
+    			ObjectLanguageInstance.saveObject(r, fs, rpath);
+			}
+		}
+		else
 		if(function.equalsIgnoreCase("addObject"))
 		{
 			//Create a default instance of a room (using a model)
@@ -829,6 +1036,16 @@ pw.append("</tr>");
     			rpath += "/data.txt";
     			ObjectLanguageInstance.saveObject(r, fs, rpath);
 			}
+		}
+		else
+		if(function.equalsIgnoreCase("removeContained"))
+		{
+			//don't modify the room data at this point
+    		String rid = toProcess.parms.get("cinstance");
+    		int cind = ArrayUtils.getIndex(o.contains,rid);
+    		o.physicalRepresentation.contains_metric_transform = ArrayUtils.remove(o.physicalRepresentation.contains_metric_transform,cind*12,12);
+    		o.contains = ArrayUtils.remove(o.contains,cind,1);
+    		o.contains_type = ArrayUtils.remove(o.contains_type,cind,1);
 		}
 		else
 		if(function.equalsIgnoreCase("setContainedPosition"))

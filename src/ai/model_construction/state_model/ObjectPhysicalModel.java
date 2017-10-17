@@ -2,6 +2,9 @@ package ai.model_construction.state_model;
 
 public class ObjectPhysicalModel 
 {
+	//All models consist of a parameterised generative system
+	//and a set of constraints
+	
 	//A morphable model to determine shape
 	//Verts in the model can define joint locations for skinned characters
 

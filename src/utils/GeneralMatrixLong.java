@@ -7,8 +7,12 @@ To get the latest version of this code goto http://johndavidbustard.com/mmconst.
 */
 package utils;
 
-public class GeneralMatrixLong 
+import java.io.Serializable;
+
+public class GeneralMatrixLong implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	public int width=0; //columns
 	public int height=0; //rows
 	public long[] value=null; //array of values

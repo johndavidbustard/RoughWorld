@@ -1,5 +1,7 @@
 package utils.shapes;
 
+import utils.GeneralMatrixString;
+
 public class Cuboid extends ParametricShape
 {
 	private static final long serialVersionUID = 1L;
@@ -14,6 +16,11 @@ public class Cuboid extends ParametricShape
 		parameters = new double[]{4.5,3.5,2.4};
 	}
 	
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		paths.push_back(prefix+"/Cuboid");
+	}
+
 	public ParametricShape copy()
 	{
 		Cuboid c = new Cuboid();

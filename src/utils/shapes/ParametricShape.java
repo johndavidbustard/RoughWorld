@@ -2,6 +2,8 @@ package utils.shapes;
 
 import java.io.Serializable;
 
+import utils.GeneralMatrixString;
+
 public abstract class ParametricShape implements Serializable 
 {
 	private static final long serialVersionUID = 1L;
@@ -9,7 +11,10 @@ public abstract class ParametricShape implements Serializable
 	public static final String[] buildingShapes = {"RectangularBuildingFloor","ReverseRBuildingFloor"};
 	public static final String[] roomShapes = {"RectangularRoom","RRoom"};
 	public static final String[] portalShapes = {"RectangularPortal"};
-	public static final String[] objectShapes = {"Cuboid","CSGShape","DeformedCuboid","QuadraticCurvedCuboid","ModifiedCopyShape"};
+	public static final String[] objectShapes = {"Cuboid","CSGShape","DeformedCuboid","QuadraticCurvedCuboid","ModifiedCopyShape","HumanShape"};
+	public static final String[] characterShapes = {"HumanShape"};
+
+	public static final String[] allsidenames = {"Left","Right","Bottom","Top","Back","Front"};
 
 	public static String[] getShapesByType(String type)
 	{
@@ -32,16 +37,34 @@ public abstract class ParametricShape implements Serializable
 		{
 			return objectShapes;
 		}
+		else
+		if(type.equalsIgnoreCase("Character"))
+		{
+			return characterShapes;
+		}
 		return null;
 	}
 	
 	public double[] parameters;
+	
+	public abstract void getShapePaths(String prefix,GeneralMatrixString paths);
 	
 	public abstract String[] getParameterNames();
 	public abstract String[] getSideNames();
 	
 	public abstract void setCuboidDimensions(double x,double y,double z);
 	public abstract void getCuboidDimensions(double[] xyz);
+	
+	public void getAABB(double[] xyzminandmax)
+	{
+		getCuboidDimensions(xyzminandmax);
+		xyzminandmax[3] = xyzminandmax[0];
+		xyzminandmax[4] = xyzminandmax[1];
+		xyzminandmax[5] = xyzminandmax[2];
+		xyzminandmax[0] = 0;
+		xyzminandmax[1] = 0;
+		xyzminandmax[2] = 0;
+	}
 	
 	public abstract ParametricShape copy();
 	
@@ -56,6 +79,11 @@ public abstract class ParametricShape implements Serializable
 
 	public static ParametricShape get(String name)
 	{
+		if(name.equalsIgnoreCase("HumanShape"))
+		{
+			return new HumanShape();
+		}
+		else
 		if(name.equalsIgnoreCase("ModifiedCopyShape"))
 		{
 			return new ModifiedCopyShape();

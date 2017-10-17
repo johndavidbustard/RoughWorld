@@ -101,6 +101,15 @@
             <parameters>30.0</parameters>
             <parameters>0.0</parameters>
             <parameters>0.0</parameters>
+            <parameters>0.055</parameters>
+            <parameters>0.055</parameters>
+            <parameters>0.115</parameters>
+            <parameters>0.015</parameters>
+            <parameters>0.035</parameters>
+            <parameters>0.0</parameters>
+            <parameters>0.0</parameters>
+            <parameters>0.0</parameters>
+            <parameters>0.0</parameters>
         </shape>
     </physicalRepresentation>
     <within>room_cn_living_room_wn31_103685038/Rent3D_28025487_reception</within>

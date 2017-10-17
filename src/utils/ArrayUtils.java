@@ -9,6 +9,13 @@ public class ArrayUtils
 		nv[v.length] = i;
 		return nv;
 	}
+	public static String[][] add(String[][] v, String[] i)
+	{
+		String[][] nv = new String[v.length+1][];
+		System.arraycopy(v, 0, nv, 0, v.length);
+		nv[v.length] = i;
+		return nv;
+	}
 	public static int[] add(int[] v, int i)
 	{
 		int[] nv = new int[v.length+1];
@@ -21,6 +28,13 @@ public class ArrayUtils
 		double[] nv = new double[v.length+i.length];
 		System.arraycopy(v, 0, nv, 0, v.length);
 		System.arraycopy(i, 0, nv, v.length, i.length);
+		return nv;
+	}
+	public static double[] add(double[] v, double i)
+	{
+		double[] nv = new double[v.length+1];
+		System.arraycopy(v, 0, nv, 0, v.length);
+		nv[v.length] = i;
 		return nv;
 	}
 

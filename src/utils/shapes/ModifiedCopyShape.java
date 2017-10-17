@@ -1,5 +1,8 @@
 package utils.shapes;
 
+import utils.GeneralMatrixString;
+import utils.shapes.human.HumanDeformedCuboids;
+
 public class ModifiedCopyShape extends ParametricShape
 {
  	private static final long serialVersionUID = 1L;
@@ -12,6 +15,11 @@ public class ModifiedCopyShape extends ParametricShape
  	public String[] sidenames = new String[]{};
  	public String[] getParameterNames() { return parameternames; }
  	public String[] getSideNames() { return sidenames; }
+
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		modifiedCopy.getShapePaths(prefix+"/ModifiedCopy/", paths);
+	}
 
  	public ModifiedCopyShape()
  	{

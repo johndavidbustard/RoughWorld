@@ -18,6 +18,7 @@ public class UniformlySkinnedShape
 	
 	public void calcTransform(double x,double y,double z,double[] transform)
 	{
-		
+		//a quadratic bezier volume constructed from the control points
+		//this determines the new location of the points after the deformation
 	}
 }

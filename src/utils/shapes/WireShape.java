@@ -1,5 +1,7 @@
 package utils.shapes;
 
+import utils.GeneralMatrixString;
+
 public class WireShape extends ParametricShape implements Deformer
 { 
 	private static final long serialVersionUID = 1L;
@@ -13,7 +15,17 @@ public class WireShape extends ParametricShape implements Deformer
 	public boolean deformSegment = true;
 	public ParametricShape wireSegment = null; 
 	public double[] precomputedWireLengths = new double[]{};
-	
+
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		//Todo need to calculate this properly
+		int numSegments = 10;
+		for(int i=0;i<numSegments;i++)
+		{
+			wireSegment.getShapePaths(prefix+"/"+i, paths);
+		}
+	}
+
 	public WireShape()
 	{
 		parameters = new double[]{0.0,0.0,0.0,0.0};
@@ -21,7 +33,7 @@ public class WireShape extends ParametricShape implements Deformer
 	
 	public void deform(double[] vs,int off,int len,double[] dvs,int doff,int dlen)
 	{
-		//the z of the shape determines the position along the wire
+		//the y of the shape determines the position along the wire
 		
 		//use the points to determine the wire shape
 		

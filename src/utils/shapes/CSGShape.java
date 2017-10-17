@@ -2,6 +2,7 @@ package utils.shapes;
 
 import utils.ArrayUtils;
 import utils.GeneralMatrixDouble;
+import utils.GeneralMatrixString;
 
 public class CSGShape extends ParametricShape
 {
@@ -12,6 +13,15 @@ public class CSGShape extends ParametricShape
  	public String[] getParameterNames() { return parameternames; }
  	public String[] getSideNames() { return sidenames; }
 
+	public void getShapePaths(String prefix,GeneralMatrixString paths)
+	{
+		for(int i=0;i<shapeNames.length;i++)
+		{
+			shapes[i].getShapePaths(prefix+"/"+shapeNames[i], paths);
+		}
+	}
+
+ 	
 	public static final int ADD = 0;
 	public static final int SUBTRACT = 1;
 	
@@ -275,4 +285,102 @@ public class CSGShape extends ParametricShape
 	 		xyz[2] = 1.0;
  		}
  	}
+ 	
+	public void getAABB(double[] xyz)
+	{
+ 		if(shapes.length>0)
+ 		{
+ 			//Calc the cuboid of each shape
+ 			//for each calc the verts and transform with the shape transform
+ 			//determine the max and min in each dimension
+ 			double minx = Double.MAX_VALUE;
+ 			double miny = Double.MAX_VALUE;
+ 			double minz = Double.MAX_VALUE;
+ 			double maxx = -Double.MAX_VALUE;
+ 			double maxy = -Double.MAX_VALUE;
+ 			double maxz = -Double.MAX_VALUE;
+			final double DEG2RAD = Math.PI/180.0;
+ 			double[] sdim = new double[6];
+ 			for(int si=0;si<shapes.length;si++)
+ 			{
+ 				GeneralMatrixDouble transform = new GeneralMatrixDouble(4,4);
+ 				transform.setIdentity();
+ 				transform.set3DTransformPosition(shapeTransforms[si*6+0], shapeTransforms[si*6+1], shapeTransforms[si*6+2]);
+ 				transform.set3DTransformRotation(shapeTransforms[si*6+3]*DEG2RAD, shapeTransforms[si*6+4]*DEG2RAD, shapeTransforms[si*6+5]*DEG2RAD);
+ 				
+ 				shapes[si].getAABB(sdim);
+ 				
+ 				double[] localverts = new double[4*8];
+ 				
+ 				double w0 = sdim[0];
+ 				double h0 = sdim[1];
+ 				double d0 = sdim[2];
+ 				double w = sdim[3];
+ 				double h = sdim[4];
+ 				double d = sdim[5];
+ 				
+ 				localverts[0*4+0] = w0; localverts[0*4+1] = h0; localverts[0*4+2] = d0; localverts[0*4+3] = 1.0;
+ 				localverts[1*4+0] = 1*w; localverts[1*4+1] = h0; localverts[1*4+2] = d0; localverts[1*4+3] = 1.0;
+ 				localverts[2*4+0] = w0; localverts[2*4+1] = 1*h; localverts[2*4+2] = d0; localverts[2*4+3] = 1.0;
+ 				localverts[3*4+0] = 1*w; localverts[3*4+1] = 1*h; localverts[3*4+2] = d0; localverts[3*4+3] = 1.0;
+
+ 				localverts[4*4+0*4+0] = w0; localverts[4*4+0*4+1] = h0; localverts[4*4+0*4+2] = 1*d; localverts[4*4+0*4+3] = 1.0;
+ 				localverts[4*4+1*4+0] = 1*w; localverts[4*4+1*4+1] = h0; localverts[4*4+1*4+2] = 1*d; localverts[4*4+1*4+3] = 1.0;
+ 				localverts[4*4+2*4+0] = w0; localverts[4*4+2*4+1] = 1*h; localverts[4*4+2*4+2] = 1*d; localverts[4*4+2*4+3] = 1.0;
+ 				localverts[4*4+3*4+0] = 1*w; localverts[4*4+3*4+1] = 1*h; localverts[4*4+3*4+2] = 1*d; localverts[4*4+3*4+3] = 1.0;
+
+ 				for(int vi=0;vi<localverts.length/4;vi++)
+ 				{
+ 					double px = localverts[vi*4+0];
+ 					double py = localverts[vi*4+1];
+ 					double pz = localverts[vi*4+2];
+ 					double ph = localverts[vi*4+3];
+ 			    	double transx = (px*transform.value[4*0+0])+(py*transform.value[4*1+0])+(pz*transform.value[4*2+0])+(ph*transform.value[4*3+0]);
+ 			    	double transy = (px*transform.value[4*0+1])+(py*transform.value[4*1+1])+(pz*transform.value[4*2+1])+(ph*transform.value[4*3+1]);
+ 			    	double transz = (px*transform.value[4*0+2])+(py*transform.value[4*1+2])+(pz*transform.value[4*2+2])+(ph*transform.value[4*3+2]);
+ 			    	double transh = (px*transform.value[4*0+3])+(py*transform.value[4*1+3])+(pz*transform.value[4*2+3])+(ph*transform.value[4*3+3]);
+// 			    	worldverts[vi*4+0] = transx;
+// 			    	worldverts[vi*4+1] = transy;
+// 			    	worldverts[vi*4+2] = transz;
+// 			    	worldverts[vi*4+3] = transh;
+
+ 					if(transx<minx)
+ 						minx = transx;
+ 					if(transy<miny)
+ 						miny = transy;
+ 					if(transz<minz)
+ 						minz = transz;
+
+ 			    	if(transx>maxx)
+ 			    	{
+ 			    		maxx = transx;
+ 			    	}
+ 			    	if(transy>maxy)
+ 			    	{
+ 			    		maxy = transy;
+ 			    	}
+ 			    	if(transz>maxz)
+ 			    	{
+ 			    		maxz = transz;
+ 			    	}
+ 				}
+ 				
+ 			}
+ 			xyz[0] = minx;
+ 			xyz[1] = miny;
+ 			xyz[2] = minz;
+ 			xyz[3] = maxx;
+ 			xyz[4] = maxy;
+ 			xyz[5] = maxz;
+ 		}
+ 		else
+ 		{
+	 		xyz[0] = 0.0;
+	 		xyz[1] = 0.0;
+	 		xyz[2] = 0.0;
+	 		xyz[3] = 1.0;
+	 		xyz[4] = 1.0;
+	 		xyz[5] = 1.0;
+ 		}
+	}
 }

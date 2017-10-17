@@ -1,8 +1,12 @@
 package utils;
 
+import java.io.Serializable;
 
-public class GeneralMatrixString 
+
+public class GeneralMatrixString implements Serializable 
 {
+	private static final long serialVersionUID = 1L;
+
 	public int width = 0;
 	public int height = 0;
 	public String[] value;
